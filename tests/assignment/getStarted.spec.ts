@@ -1,8 +1,9 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 import { GetStartedPage } from './pages/getStartedPage';
 import { HomePage } from './pages/homePage';
 
 test.describe('Board, List and Card tests', () => {
+  test.describe.configure({ mode: 'serial' });
 
   test.beforeEach(async ({ page }, testInfo) => {
     console.log(`Running ${testInfo.title}`);
@@ -10,7 +11,6 @@ test.describe('Board, List and Card tests', () => {
   });
 
   test('Create Board, List and Card', async ({ page }) => {
-
     const getStartedPage = new GetStartedPage(page);
     const homePage = new HomePage(page);
 
@@ -18,21 +18,17 @@ test.describe('Board, List and Card tests', () => {
     await homePage.createList('List-1');
     await homePage.createCard('Card-1');
     await expect(homePage.cardName).toHaveText('Card-1');
-    // await homePage.deleateBoard();
-    // await expect(homePage.boardDeletedPopup).toBeVisible();
   });
 
   test('Create one more board', async ({ page }) => {
-
     const homePage = new HomePage(page);
-    
+
     await homePage.createBoard('Board-2');
   });
 
   test('Delete all boards', async ({ page }) => {
-
     const homePage = new HomePage(page);
-    
+
     await homePage.deleteAllBoards();
     await expect(homePage.boardDeletedPopup).toBeVisible();
   });

@@ -59,6 +59,7 @@ export class HomePage {
             await this.nextBoard.click();
             await this.boardOptionsButton.click();
             await this.deleteBoardButon.click();
+            await this.page.waitForTimeout(1000);
         }
     }
 }
