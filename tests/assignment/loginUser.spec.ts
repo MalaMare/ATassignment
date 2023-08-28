@@ -8,13 +8,17 @@ const unregisteredEmail = "invalidEmail@example.com";
 const invalidEmailFormat = "invalidEmailFormat.com";
 const invalidPassword = "invalidPassword";
 
+test.beforeEach(async ({ page }, testInfo) => {
+  console.log(`Running ${testInfo.title}`);
+  await page.goto('/');
+});
+
 test.describe('Log in Tests', () => {
 
   test('Log in with the existing user and log out', async ({ page }) => {
 
     const loginPage = new LoginPage(page);
     const getStartedPage = new GetStartedPage(page);
-    await page.goto('/');
 
     await loginPage.loginUser(loginEmail, loginPassword);
     await expect(getStartedPage.logoutButton).toBeVisible();
@@ -26,7 +30,6 @@ test.describe('Log in Tests', () => {
 
     const loginPage = new LoginPage(page);
     const getStartedPage = new GetStartedPage(page);
-    await page.goto('/');
 
     await loginPage.loginUser(unregisteredEmail, invalidPassword);
     await expect(getStartedPage.invalidUserPopup).toBeVisible();
@@ -37,7 +40,6 @@ test.describe('Log in Tests', () => {
 
     const loginPage = new LoginPage(page);
     const getStartedPage = new GetStartedPage(page);
-    await page.goto('/');
 
     await loginPage.loginUser(invalidEmailFormat, invalidPassword);
     await expect(getStartedPage.invalidEmailFormatPopup).toBeVisible();

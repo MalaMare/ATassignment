@@ -8,13 +8,18 @@ const signupPassword = `Password${Utils.getRandomNumber()}`;
 const invalidEmailFormat = "invalidEmailFormat.com";
 const invalidPassword = "invalidPassword";
 
+test.beforeEach(async ({ page }, testInfo) => {
+  console.log(`Running ${testInfo.title}`);
+  await page.goto('/');
+});
+
 test.describe('Sign up tests', () => {
 
   test('Sign up with the valid credentials and log out', async ({ page }) => {
 
     const signupPage = new SignupPage(page);
     const getStartedPage = new GetStartedPage(page);
-    await page.goto('/');
+    // await page.goto('/');
 
     await signupPage.signupUser(signupEmail, signupPassword);
     await expect(getStartedPage.logoutButton).toBeVisible();
@@ -26,7 +31,7 @@ test.describe('Sign up tests', () => {
 
     const signupPage = new SignupPage(page);
     const getStartedPage = new GetStartedPage(page);
-    await page.goto('/');
+    // await page.goto('/');
 
     await signupPage.signupUser(invalidEmailFormat, invalidPassword);
     await expect(getStartedPage.invalidEmailFormatPopup).toBeVisible();
