@@ -21,6 +21,13 @@ test.describe('Board, List and Card tests', () => {
     await expect(homePage.cardName).toHaveText('Card-1');
   });
 
+  test('Edit Card', async ({ page }) => {
+    await homePage.pickDueDate(7);
+    await homePage.checkDueDate();
+    await homePage.fillDescription('Test Description');
+    await expect(homePage.dueDate).toHaveClass(/completed/);
+  });
+
   test('Create one more board', async ({ page }) => {
     await homePage.createBoard('Board-2');
   });

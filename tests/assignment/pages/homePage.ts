@@ -15,6 +15,17 @@ export class HomePage {
     readonly addBoardTitle: Locator;
     readonly createBoardButton: Locator;
 
+    readonly dueDate: Locator;
+    readonly calendarDropdown: Locator;
+    readonly headerMonth: Locator;
+    readonly selectMonth: Locator;
+    readonly selectDate: Locator;
+    readonly cardDescription: Locator;
+    readonly cancelCardDetailBackdrop: Locator;
+    readonly cardCheckbox: Locator;
+
+
+
     constructor(page: Page) {
         this.page = page;
         this.listTitleInput = page.getByPlaceholder('Enter list title...');
@@ -26,10 +37,18 @@ export class HomePage {
         this.deleteBoardButon = page.locator('[data-cy="delete-board"]');
         this.boardDeletedPopup = page.getByText('Board was deleted');
         this.nextBoard = page.locator('//div[1]/h2');
-
         this.newBoardHomePage = page.getByText('Create new board');
         this.addBoardTitle = page.locator('//input');
         this.createBoardButton = page.locator('//button[contains(text(),"Create board")]');
+
+        this.dueDate = page.locator('[data-cy="due-date"]');
+        this.calendarDropdown = page.locator('[data-cy="calendar-dropdown"]');
+        this.headerMonth = page.locator('[data-cy="header-month"]');
+        this.selectMonth = page.locator('[data-cy="month"]');
+        this.selectDate = page.locator('[data-cy="day"]');
+        this.cardDescription = page.locator('[data-cy="card-description"]')
+        this.cardCheckbox = page.locator('div[data-cy="card-detail"] input[data-cy="card-checkbox"]');
+        this.cancelCardDetailBackdrop = page.locator('[data-cy="cancel"]');
     }
 
     async createList(listName: string) {
@@ -62,5 +81,33 @@ export class HomePage {
             await this.page.waitForTimeout(1000);
         }
     }
-}
 
+    async pickDueDate(days: number) {
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var date = new Date();
+        date.setDate(date.getDate() + days);
+        console.log(date);
+
+        var mm = date.getMonth();
+        var dd = date.getDate().toString();
+        var choosenMonth = months[mm];
+
+        await this.nextBoard.click();
+        await this.dueDate.click();
+        await this.calendarDropdown.click();
+        await this.headerMonth.click();
+        await this.selectMonth.getByText(choosenMonth).click();
+        await this.selectDate.getByText(dd, { exact: true }).click();
+    }
+
+    async checkDueDate() {
+        await this.cardCheckbox.click();
+    }
+
+    async fillDescription(description: string) {
+        await this.cardDescription.fill(description);
+        await this.cancelCardDetailBackdrop.click();
+    }
+
+
+}
