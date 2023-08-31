@@ -1,5 +1,4 @@
 import { type Locator, type Page } from "@playwright/test";
-
 export class HomePage {
     readonly page: Page;
     readonly listTitleInput: Locator;
@@ -14,6 +13,7 @@ export class HomePage {
     readonly newBoardHomePage: Locator;
     readonly addBoardTitle: Locator;
     readonly createBoardButton: Locator;
+    readonly homeBoardName: Locator;
 
     readonly dueDate: Locator;
     readonly calendarDropdown: Locator;
@@ -21,10 +21,8 @@ export class HomePage {
     readonly selectMonth: Locator;
     readonly selectDate: Locator;
     readonly cardDescription: Locator;
-    readonly cancelCardDetailBackdrop: Locator;
     readonly cardCheckbox: Locator;
-
-
+    readonly cancelCardDetailBackdrop: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -40,6 +38,7 @@ export class HomePage {
         this.newBoardHomePage = page.getByText('Create new board');
         this.addBoardTitle = page.locator('//input');
         this.createBoardButton = page.locator('//button[contains(text(),"Create board")]');
+        this.homeBoardName = page.locator('[data-cy="board-title"]');
 
         this.dueDate = page.locator('[data-cy="due-date"]');
         this.calendarDropdown = page.locator('[data-cy="calendar-dropdown"]');
@@ -66,6 +65,7 @@ export class HomePage {
         await this.newBoardHomePage.click();
         await this.addBoardTitle.fill(boardName);
         await this.createBoardButton.click();
+        await this.page.waitForTimeout(2000);
     }
 
     async deleateBoard() {
@@ -85,12 +85,17 @@ export class HomePage {
     async pickDueDate(days: number) {
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         var date = new Date();
+        console.log(date);
         date.setDate(date.getDate() + days);
         console.log(date);
 
         var mm = date.getMonth();
         var dd = date.getDate().toString();
         var choosenMonth = months[mm];
+
+        console.log(mm);
+        console.log(dd);
+        console.log(choosenMonth);
 
         await this.nextBoard.click();
         await this.dueDate.click();
@@ -108,6 +113,5 @@ export class HomePage {
         await this.cardDescription.fill(description);
         await this.cancelCardDetailBackdrop.click();
     }
-
 
 }

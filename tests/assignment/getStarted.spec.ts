@@ -30,6 +30,7 @@ test.describe('Board, List and Card tests', () => {
 
   test('Create one more board', async ({ page }) => {
     await homePage.createBoard('Board-2');
+    await expect(homePage.homeBoardName).toBeVisible();
   });
 
   test('Delete all boards', async ({ page }) => {
