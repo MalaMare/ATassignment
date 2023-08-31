@@ -22,6 +22,7 @@ test.describe('Board, List and Card tests', () => {
   });
 
   test('Edit Card', async ({ page }) => {
+    await homePage.openBoardFromHomepage();
     await homePage.pickDueDate(7);
     await homePage.checkDueDate();
     await homePage.fillDescription('Test Description');

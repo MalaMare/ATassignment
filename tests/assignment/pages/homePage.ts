@@ -97,12 +97,16 @@ export class HomePage {
         console.log(dd);
         console.log(choosenMonth);
 
-        await this.nextBoard.click();
+        // await this.nextBoard.click();
         await this.dueDate.click();
         await this.calendarDropdown.click();
         await this.headerMonth.click();
         await this.selectMonth.getByText(choosenMonth).click();
         await this.selectDate.getByText(dd, { exact: true }).click();
+    }
+
+    async openBoardFromHomepage() {
+        await this.nextBoard.click();
     }
 
     async checkDueDate() {
