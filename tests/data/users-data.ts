@@ -1,11 +1,17 @@
 import { Utils } from "../assignment/pages/utils";
 
 export default {
-    signupEmail: `ipfolio${Utils.getRandomNumber()}@mail.com`,
-    signupPassword: `Password${Utils.getRandomNumber()}`,
-    loginEmail: "ipfolio@mail.com",
-    loginPassword: "Password",
-    invalidEmailFormat: "invalidEmailFormat.com",
-    invalidPassword: "invalidPassword",
+    signupUser:{
+    email: `ipfolio${Utils.getRandomNumber()}@mail.com`,
+    password: `Password${Utils.getRandomNumber()}`,
+    },
+    loginUser: {
+    email: "ipfolio@mail.com",
+    password: "Password",
+    },
+    invalidUser: {
+    emailFormat: "invalidEmailFormat.com",
+    password: "invalidPassword",
+    },
     unregisteredEmail: "invalidEmail@example.com",
 };

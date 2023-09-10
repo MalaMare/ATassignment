@@ -15,14 +15,14 @@ test.describe('Sign up tests', () => {
   });
 
   test('Sign up with the valid credentials and log out', async () => {
-    await signupPage.signupUser(users.signupEmail, users.signupPassword);
+    await signupPage.signupUser(users.signupUser.email, users.signupUser.password);
     await expect(getStartedPage.logoutButton).toBeVisible();
     await getStartedPage.logoutButton.click();
     await expect(getStartedPage.logInButton).toBeVisible();
   });
 
   test('Sign up with the invalid email format', async () => {
-    await signupPage.signupUser(users.invalidEmailFormat, users.invalidPassword);
+    await signupPage.signupUser(users.invalidUser.emailFormat, users.invalidUser.emailFormat);
     await expect(getStartedPage.invalidEmailFormatPopup).toBeVisible();
     await expect(getStartedPage.logInButton).toBeVisible();
   });

@@ -15,20 +15,20 @@ test.describe('Log in Tests', () => {
   });
 
   test('Log in with the existing user and log out', async () => {
-    await loginPage.loginUser(users.loginEmail, users.loginPassword);
+    await loginPage.loginUser(users.loginUser.email, users.loginUser.password);
     await expect(getStartedPage.logoutButton).toBeVisible();
     await getStartedPage.logoutButton.click();
     await expect(getStartedPage.logInButton).toBeVisible();
   });
 
   test('Log in with the non existing user', async () => {
-    await loginPage.loginUser(users.unregisteredEmail, users.invalidPassword);
+    await loginPage.loginUser(users.unregisteredEmail, users.invalidUser.password);
     await expect(getStartedPage.invalidUserPopup).toBeVisible();
     await expect(getStartedPage.logInButton).toBeVisible();
   });
 
   test('Log in with the invalid email format', async () => {
-    await loginPage.loginUser(users.invalidEmailFormat, users.invalidPassword);
+    await loginPage.loginUser(users.invalidUser.emailFormat, users.invalidUser.password);
     await expect(getStartedPage.invalidEmailFormatPopup).toBeVisible();
     await expect(getStartedPage.logInButton).toBeVisible();
   });
