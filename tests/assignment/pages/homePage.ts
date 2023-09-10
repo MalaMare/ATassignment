@@ -84,18 +84,19 @@ export class HomePage {
 
     async pickDueDate(days: number) {
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        var date = new Date();
+        const date = new Date();
         console.log(date);
         date.setDate(date.getDate() + days);
         console.log(date);
 
-        var mm = date.getMonth();
-        var dd = date.getDate().toString();
-        var choosenMonth = months[mm];
+        const mm = date.getMonth();
+        const dd = date.getDate().toString();
+        const choosenMonth = months[mm];
 
         console.log(mm);
         console.log(dd);
         console.log(choosenMonth);
+
 
         await this.dueDate.click();
         await this.calendarDropdown.click();
