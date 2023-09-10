@@ -97,7 +97,6 @@ export class HomePage {
         console.log(dd);
         console.log(choosenMonth);
 
-        // await this.nextBoard.click();
         await this.dueDate.click();
         await this.calendarDropdown.click();
         await this.headerMonth.click();
